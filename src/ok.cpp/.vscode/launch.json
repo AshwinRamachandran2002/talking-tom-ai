@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug fine encoder",
+            "type": "lldb",
+            "request": "launch",
+            "program": "./tests/test-fine-encoder",
+            "args": [],
+            "cwd": "${fileDirname}",
+            "preLaunchTask": "build test fine encoder",
+        },
+        {
+            "name": "Debug gpt-eval",
+            "type": "lldb",
+            "request": "launch",
+            "program": "./tests/test-gpt-eval",
+            "args": [],
+            "cwd": "${fileDirname}",
+            "preLaunchTask": "build test gpt eval",
+        }
+    ]
+}
