@@ -7,7 +7,6 @@ from gtts import gTTS
 from pydub import AudioSegment
 from scipy.io.wavfile import write as write_wav
 
-# os.environ["CUDA_VISIBLE_DEVICES"] = ""
 os.environ["SUNO_USE_SMALL_MODELS"] = "1"
 
 from encodec.utils import convert_audio
@@ -22,10 +21,6 @@ from bark.generation import codec_decode, generate_coarse, generate_fine, genera
 
 
 class Pitch:
-
-    def __init__(self):
-        pass
-
     def setup_voice_clone(self, voice_name, voice_path):
         if os.path.exists(f'bark/new_voice_clone/{voice_name}.npz'):
             return
@@ -88,7 +83,7 @@ class Pitch:
 
         audio_array = codec_decode(x_fine_gen)
 
-        filepath = "output_pitch_rajini.wav"
+        filepath = "output.wav"
         write_wav(filepath, SAMPLE_RATE, audio_array)
         return filepath
 
@@ -100,10 +95,11 @@ class Pitch:
         hipitch_sound = sound._spawn(sound.raw_data, overrides={'frame_rate': new_sample_rate})
         hipitch_sound = hipitch_sound.set_frame_rate(44100)
         hipitch_sound.export("output_pitch_normal.wav", format="wav")
+        return "output.wav"
 
     def pitch_vanilla(self, text_prompt):
         my_obj = gTTS(text=text_prompt, lang="en") 
-        file_name = "output_pitch_vanilla.mp3"
+        file_name = "output.mp3"
         my_obj.save(file_name)
         return file_name
 
